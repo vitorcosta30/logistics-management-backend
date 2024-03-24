@@ -1,4 +1,4 @@
-namespace MDGA.Domain.Shared
+namespace logistics_management_backend.Domain.Shared
 {
     public interface IValueObject
     {

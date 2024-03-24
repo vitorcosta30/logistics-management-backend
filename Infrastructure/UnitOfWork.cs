@@ -1,4 +1,4 @@
-using MDGA.Domain.Shared;
+using logistics_management_backend.Domain.Shared;
 
 namespace logistics_management_backend.Infrastructure;
 
