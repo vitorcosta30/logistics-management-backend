@@ -1,4 +1,5 @@
 using logistics_management_backend.Infrastructure;
+using logistics_management_backend.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace logistics_management_backend
@@ -26,6 +27,8 @@ namespace logistics_management_backend
         }
         public void ConfigureMyServices(IServiceCollection services)
         {
+            services.AddTransient<IUnitOfWork,UnitOfWork>();
+            services.AddHttpClient();
 
 
         }
