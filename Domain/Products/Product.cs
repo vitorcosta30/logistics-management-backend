@@ -6,11 +6,13 @@ namespace logistics_management_backend.Domain.Goods
 
 
         public String description{get; set;}
+        public ProductPosition position { get; set; }
         public Product(){
         this.description = "";
         }
-        public Product(String idGoods, String description ){
+        public Product(String description ){
             this.description = description;
+            this.position = new ProductPosition();
 
         }
         
