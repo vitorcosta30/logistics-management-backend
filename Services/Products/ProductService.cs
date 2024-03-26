@@ -1,3 +1,4 @@
+using logistics_management_backend.Domain.Goods;
 using logistics_management_backend.Domain.Shared;
 using logistics_management_backend.DTO.Products;
 using logistics_management_backend.Infrastructure.Products;
@@ -16,15 +17,23 @@ public class ProductService : IProductService
         this._repo = repository;
     }
 
-    public Task<List<ProductDTO>> getAllAsync()
+    public async Task<List<ProductDTO>> getAllAsync()
     {
-        throw new NotImplementedException();
+        var list = await _repo.GetAllAsync();
+
+        List<ProductDTO> res =  list.ConvertAll<ProductDTO>(prod => ProductMapper.toDto(prod));
+        return res;
     }
 
     public Task<List<ProductDTO>> getByPosistionAsync(int xPos, int yPos)
     {
         throw new NotImplementedException();
     }
-    
-    
+
+    public async Task<ProductDTO> addProduct(ProductDTO dto)
+    {
+        await _repo.AddAsync(ProductMapper.toDomain(dto));
+        await _unitOfwork.CommitAsync();
+        return dto;
+    }
 }

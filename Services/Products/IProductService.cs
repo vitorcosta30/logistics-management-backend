@@ -7,7 +7,8 @@ public interface IProductService
     Task<List<ProductDTO>> getAllAsync();
     
     Task<List<ProductDTO>> getByPosistionAsync(int xPos,int yPos);
-    
+    Task<ProductDTO> addProduct(ProductDTO dto);
+
 
 
 }
