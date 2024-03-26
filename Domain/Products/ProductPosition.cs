@@ -1,6 +1,8 @@
+using logistics_management_backend.Domain.Shared;
+
 namespace logistics_management_backend.Domain.Goods;
 
-public class ProductPosition
+public class ProductPosition : Entity
 {
     public int posX { get; set; }
     public int posY { get; set; }
