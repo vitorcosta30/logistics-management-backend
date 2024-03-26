@@ -7,7 +7,7 @@ public class RequestMapper
 {
     public static  RequestDTO toDTO(Request request)
     {
-        return new RequestDTO(request.Id,RequestItemMapper.toDto(request.listOfItems), request.status.ToString(), RequestHistoryItemMapper.toDTO(request.status));
+        return new RequestDTO(request.Id,RequestItemMapper.toDto(request.listOfItems), request.status.currentStatus.status.ToString(), RequestHistoryItemMapper.toDTO(request.status));
 
     } 
 }

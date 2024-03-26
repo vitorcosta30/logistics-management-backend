@@ -11,7 +11,7 @@ public class RequestHistoryItemDTO
     public RequestHistoryItemDTO(Status status, DateTime startDate, long durantionMs)
     {
         this.status = status.ToString();
-        this.startDate = this.startDate.ToString();
+        this.startDate = startDate.ToString();
         this.durantionMs = durantionMs;
     }
 }
