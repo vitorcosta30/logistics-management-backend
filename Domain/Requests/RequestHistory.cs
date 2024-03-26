@@ -18,7 +18,7 @@ namespace logistics_management_backend.Domain.Requests
             this.previousStatus = new List<RequestHistoryItem>();
         }
 
-        public void onCollection(){
+        public void startCollection(){
             if(this.currentStatus.status == Status.REQUESTED){
                 statusChange(Status.COLLECTION);
             }else{

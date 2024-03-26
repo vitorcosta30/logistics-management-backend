@@ -10,27 +10,27 @@ namespace logistics_management_backend.Domain.Requests
 
         public RequestHistoryItem(Status status){
             this.status = status;
-            this.startDate = DateTime.UtcNow.Date;
+            this.startDate = DateTime.UtcNow;
             this.statusDuration = 0;
         }
 
         public RequestHistoryItem()
         {
-            this.startDate = DateTime.UtcNow.Date;
+            this.startDate = DateTime.UtcNow;
             this.statusDuration = 0;
 
 
         }
 
         public void statusChange(){
-            DateTime currentDate = DateTime.UtcNow.Date;
+            DateTime currentDate = DateTime.UtcNow;
             if(currentDate < startDate){
                 throw new BusinessRuleValidationException("Current date is before start date, something went wrong");
             }
             if(this.status == Status.RECEIVED){
                 throw new BusinessRuleValidationException("Illegal status change!!");
             }
-            this.statusDuration = currentDate.Millisecond - startDate.Millisecond;
+            this.statusDuration = (long)(currentDate - startDate).TotalMilliseconds;
         }
 
         public bool isStatusRequested()

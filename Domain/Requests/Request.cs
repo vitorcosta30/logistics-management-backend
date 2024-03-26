@@ -23,5 +23,14 @@ namespace logistics_management_backend.Domain.Requests
             listOfItems.addItem(newItem);
         }
 
+        public void startCollection()
+        {
+            if(this.status.isToBeProcessed()){
+                this.status.startCollection();
+            }else{
+                throw new BusinessRuleValidationException("Illegal Status change!!");
+            }
+        }
+
     }
 }
