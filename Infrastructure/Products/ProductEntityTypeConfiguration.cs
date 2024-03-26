@@ -10,5 +10,7 @@ public class ProductEntityTypeConfiguration: IEntityTypeConfiguration<Product>
     {
         builder.ToTable("Products", SchemaNames.LM);
         builder.HasKey(prod => prod.Id);
+        builder.HasOne<ProductPosition>(prod => prod.position);
+        
     }
 }
