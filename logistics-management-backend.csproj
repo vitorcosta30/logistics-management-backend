@@ -27,9 +27,4 @@
 
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Products\" />
-    <Folder Include="Services\Requests\" />
-  </ItemGroup>
-
 </Project>
