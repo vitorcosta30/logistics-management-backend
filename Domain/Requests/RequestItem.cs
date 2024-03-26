@@ -1,7 +1,9 @@
 using logistics_management_backend.Domain.Goods;
+using logistics_management_backend.Domain.Shared;
+
 namespace logistics_management_backend.Domain.Requests
 {
-    public class RequestItem{
+    public class RequestItem : Entity{
         public Product item{get;set;}
 
         public int quantity{get;set;}

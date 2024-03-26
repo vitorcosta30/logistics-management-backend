@@ -4,7 +4,7 @@ using logistics_management_backend.Domain.Shared;
 
 namespace logistics_management_backend.Domain.Requests
 {
-    public class RequestHistory
+    public class RequestHistory : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,6 +24,11 @@ namespace logistics_management_backend.Domain.Requests
             }else{
                 throw new BusinessRuleValidationException("Illegal Status change!!");
             }
+        }
+
+        public bool isToBeProcessed()
+        {
+            return this.currentStatus.isStatusRequested();
         }
         private void statusChange(Status newState){
                 this.currentStatus.statusChange();

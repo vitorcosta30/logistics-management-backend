@@ -2,15 +2,24 @@ using logistics_management_backend.Domain.Shared;
 
 namespace logistics_management_backend.Domain.Requests
 {
-    public class RequestHistoryItem{
+    public class RequestHistoryItem : Entity{
         public Status status{get;}
-        public DateTime startDate;
+        public DateTime startDate { get; set; }
         //Difference between start and end status in milliseconds
-        public long statusDuration;
+        public long statusDuration { get; set; }
 
         public RequestHistoryItem(Status status){
             this.status = status;
             this.startDate = DateTime.UtcNow.Date;
+            this.statusDuration = 0;
+        }
+
+        public RequestHistoryItem()
+        {
+            this.startDate = DateTime.UtcNow.Date;
+            this.statusDuration = 0;
+
+
         }
 
         public void statusChange(){
@@ -22,6 +31,11 @@ namespace logistics_management_backend.Domain.Requests
                 throw new BusinessRuleValidationException("Illegal status change!!");
             }
             this.statusDuration = currentDate.Millisecond - startDate.Millisecond;
+        }
+
+        public bool isStatusRequested()
+        {
+            return this.status == Status.REQUESTED;
         }
     }
 }

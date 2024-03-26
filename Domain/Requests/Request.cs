@@ -18,5 +18,10 @@ namespace logistics_management_backend.Domain.Requests
             this.status = new RequestHistory();
         }
 
+        public void addItem(RequestItem newItem)
+        {
+            listOfItems.addItem(newItem);
+        }
+
     }
 }

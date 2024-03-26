@@ -1,6 +1,8 @@
+using logistics_management_backend.Domain.Shared;
+
 namespace logistics_management_backend.Domain.Requests
 {
-    public class RequestItemList 
+    public class RequestItemList : Entity
     {
         public List<RequestItem> items;
 
@@ -16,5 +18,7 @@ namespace logistics_management_backend.Domain.Requests
         public void addItem(RequestItem item){
             this.items.Add(item);
         }
+        
+        
     }
 }
