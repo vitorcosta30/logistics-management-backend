@@ -45,16 +45,29 @@ public class RequestService : IRequestService
         RequestItemList listOfItems = new RequestItemList();
         for (int i = 0; i < items.Length; i++)
         {
-            Product product = this._productRepository.GetByIdAsync(items[i].product.Id).Result;
-            if (product == null)
+            try
             {
-                
+                Product product = this._productRepository.GetByIdAsyncWithPositions(items[i].product.Id).Result;
+                listOfItems.addItem(new RequestItem(product,items[i].quantity));
+
+            }catch(Exception e)
+            {
+                return null;
+
             }
-            listOfItems.addItem(new RequestItem(product,items[i].quantity));
         }
 
         Request req = new Request(listOfItems);
         await this._repo.AddAsync(req);
+        await this._unitOfwork.CommitAsync();
+        return RequestMapper.toDTO(req);
+
+    }
+
+    public async Task<RequestDTO> startProcessing(long id)
+    {
+        var req = await this._repo.GetByIdAsync(id);
+        req.startCollection();
         await this._unitOfwork.CommitAsync();
         return RequestMapper.toDTO(req);
 

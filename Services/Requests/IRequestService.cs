@@ -10,5 +10,7 @@ public interface IRequestService
     Task<List<RequestItemDTO>> getProductsInRequestAsync(long Id);
 
     Task<RequestDTO> addRequest(RequestItemDTO[] dto);
+    Task<RequestDTO> startProcessing(long id);
+
 
 }
