@@ -12,4 +12,10 @@ public class ProductPosition : Entity
         this.posX = 0;
         this.posY = 0;
     }
+    
+    public ProductPosition(int posX, int posY)
+    {
+        this.posX = posX;
+        this.posY = posY;
+    }
 }

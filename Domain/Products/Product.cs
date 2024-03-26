@@ -15,6 +15,17 @@ namespace logistics_management_backend.Domain.Goods
             this.position = new ProductPosition();
 
         }
+        public Product(String description, ProductPosition position ){
+            this.description = description;
+            this.position = position;
+
+        }
+        public Product(String description, int xPos, int yPos ){
+            this.description = description;
+            this.position = new ProductPosition(xPos,yPos);
+
+        }
+        
         
     }
 }
