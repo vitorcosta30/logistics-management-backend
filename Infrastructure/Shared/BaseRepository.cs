@@ -2,11 +2,14 @@ using logistics_management_backend.Domain.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+
 namespace logistics_management_backend.Infrastructure.Shared;
 
-public class BaseRepository<T> : IRepository<T> where T : Entity
+public abstract class BaseRepository<T> : IRepository<T> where T : Entity
 {
     private readonly DbSet<T> _objs;
     public BaseRepository(DbSet<T> objs)
@@ -18,20 +21,19 @@ public class BaseRepository<T> : IRepository<T> where T : Entity
 
     public async Task<List<T>> GetAllAsync()
     {
-        return await this._objs.ToListAsync();
+        return await getAllObjects().ToListAsync();
     }
 
     public async Task<T> GetByIdAsync(long id)
     {
-        return await this._objs
+        return await getAllObjects()
             .Where(x => id.Equals(x.Id)).FirstOrDefaultAsync();
         
     }
 
     public async Task<List<T>> GetByIdsAsync(List<long> ids)
     {
-        return await this._objs
-            .Where(x => ids.Contains(x.Id)).ToListAsync();
+        return await getAllObjects().Where(x => ids.Contains(x.Id)).ToListAsync();
         
     }
 
@@ -46,4 +48,7 @@ public class BaseRepository<T> : IRepository<T> where T : Entity
     {
         this._objs.Remove(obj);
     }
+
+    public abstract IIncludableQueryable<T, Object> getAllObjects();
+
 }
