@@ -26,9 +26,24 @@ namespace logistics_management_backend.Domain.Requests
             }
         }
 
+        public void sendRequest()
+        {
+            if(this.currentStatus.status == Status.COLLECTION){
+                statusChange(Status.SENT);
+            }else{
+                throw new BusinessRuleValidationException("Illegal Status change!!");
+            }
+            
+        }
+
         public bool isToBeProcessed()
         {
             return this.currentStatus.isStatusRequested();
+        }
+
+        public bool isOnCollection()
+        {
+            return this.currentStatus.isStatusCollection();
         }
         private void statusChange(Status newState){
                 this.currentStatus.statusChange();

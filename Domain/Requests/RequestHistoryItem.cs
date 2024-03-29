@@ -37,5 +37,9 @@ namespace logistics_management_backend.Domain.Requests
         {
             return this.status == Status.REQUESTED;
         }
+        public bool isStatusCollection()
+        {
+            return this.status == Status.COLLECTION;
+        }
     }
 }
