@@ -30,7 +30,7 @@ public class ProductsController : ControllerBase
 
     }
     
-    [HttpGet("ListProducts")]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll(){
         return await _service.getAllAsync();
     }
