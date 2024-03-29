@@ -11,6 +11,15 @@ public interface IRequestService
 
     Task<RequestDTO> addRequest(RequestItemDTO[] dto);
     Task<RequestDTO> startProcessing(long id);
+    
+    Task<RequestDTO> sendRequest(long id);
+
+    Task<RequestDTO> collectedItem(long idRequest, long idProduct);
+    
+    Task<RequestDTO> getRequestById(long id);
+
+
+
 
 
 }
