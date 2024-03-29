@@ -30,15 +30,13 @@ public class RequestsController : ControllerBase
             {
                 return Problem("There has been an error, the request was not created!!");
             }
-
+            return CreatedAtAction("CreateRequest", new { id = items }, req);
         }
         catch (Exception e)
         {
             return Problem(e.Message);
-
         }
 
-        return CreatedAtAction("CreateRequest", new { id = items }, items);
     }
 
     [HttpGet("getAllToBeProcessed")]
@@ -47,6 +45,27 @@ public class RequestsController : ControllerBase
         return await _service.getAllToBeProcessedAsync();
 
     }
+    [HttpGet("{id}")]
+    public async Task<ActionResult<RequestDTO>> getRequestById(long id)
+    {
+        return await _service.getRequestById(id);
+
+    }
+
+    [HttpPatch("collectItem/{idRequest}/{idProduct}")]
+    public async Task<ActionResult<RequestDTO>> CollectItem(long idRequest, long idProduct)
+    {
+        try
+        {
+            return await _service.collectedItem(idRequest,idProduct);
+        }
+        catch(Exception e)
+        {
+            return Problem(e.Message);
+
+        }
+    }
+
 
     [HttpPatch("startProcessing/{id}")]
     public async Task<ActionResult<RequestDTO>> StartProcessing(long id)
@@ -59,6 +78,20 @@ public class RequestsController : ControllerBase
         catch(Exception e)
         {
            return Problem(e.Message);
+
+        }
+    }
+    [HttpPatch("sendRequest/{id}")]
+    public async Task<ActionResult<RequestDTO>> SendRequest(long id)
+    {
+        try
+        {
+            return await _service.sendRequest(id);
+
+        }
+        catch(Exception e)
+        {
+            return Problem(e.Message);
 
         }
     }
