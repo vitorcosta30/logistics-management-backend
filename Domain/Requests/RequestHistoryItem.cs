@@ -41,5 +41,10 @@ namespace logistics_management_backend.Domain.Requests
         {
             return this.status == Status.COLLECTION;
         }
+
+        public bool isStatusSent()
+        {
+            return this.status == Status.SENT;
+        }
     }
 }

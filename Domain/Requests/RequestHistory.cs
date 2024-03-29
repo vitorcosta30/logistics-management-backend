@@ -45,6 +45,11 @@ namespace logistics_management_backend.Domain.Requests
         {
             return this.currentStatus.isStatusCollection();
         }
+
+        public bool isToBeReceived()
+        {
+            return this.currentStatus.isStatusSent();
+        }
         private void statusChange(Status newState){
                 this.currentStatus.statusChange();
                 this.previousStatus.Add(currentStatus);
