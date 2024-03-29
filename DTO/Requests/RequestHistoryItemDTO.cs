@@ -6,12 +6,12 @@ public class RequestHistoryItemDTO
 {
     public string status;
     public string startDate;
-    public long durantionMs;
+    public long durationMs;
 
-    public RequestHistoryItemDTO(Status status, DateTime startDate, long durantionMs)
+    public RequestHistoryItemDTO(Status status, DateTime startDate, long durationMs)
     {
         this.status = status.ToString();
         this.startDate = startDate.ToString();
-        this.durantionMs = durantionMs;
+        this.durationMs = durationMs;
     }
 }

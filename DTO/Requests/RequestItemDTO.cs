@@ -9,9 +9,12 @@ public class RequestItemDTO
 
     public int quantity;
 
-    public RequestItemDTO(ProductDTO product, int quantity)
+    public bool isCollected;
+
+    public RequestItemDTO(ProductDTO product, int quantity,bool isCollected)
     {
         this.product = product;
         this.quantity = quantity;
+        this.isCollected = isCollected;
     }
 }
