@@ -40,6 +40,14 @@ public class RequestService : IRequestService
         throw new NotImplementedException();
     }
 
+    public async Task<RequestDTO> getRequestById(long id)
+    {
+        var req = await this._repo.GetByIdAsync(id);
+        RequestDTO res = RequestMapper.toDTO(req);
+        return res;
+
+    }
+
     public async Task<RequestDTO> addRequest(RequestItemDTO[] items)
     {
         RequestItemList listOfItems = new RequestItemList();
@@ -71,5 +79,20 @@ public class RequestService : IRequestService
         await this._unitOfwork.CommitAsync();
         return RequestMapper.toDTO(req);
 
+    }
+    public async Task<RequestDTO> sendRequest(long id)
+    {
+        var req = await this._repo.GetByIdAsync(id);
+        req.sendRequest();
+        await this._unitOfwork.CommitAsync();
+        return RequestMapper.toDTO(req);
+    }
+    public async Task<RequestDTO> collectedItem(long idRequest, long idProduct)
+    {
+        var req = await this._repo.GetByIdAsync(idRequest);
+        var prod = await this._productRepository.GetByIdAsync(idProduct);
+        req.itemWasCollected(prod);
+        await this._unitOfwork.CommitAsync();
+        return RequestMapper.toDTO(req);
     }
 }
