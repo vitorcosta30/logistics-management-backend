@@ -21,11 +21,6 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
 
     }
 
-    public async Task<Product> GetByIdAsyncWithPositions(long id)
-    {
-        return await this._objs.Include(prod => prod.position)
-            .Where(x => id.Equals(x.Id)).FirstOrDefaultAsync();
-    }
 
 
     public override IIncludableQueryable<Product, ProductPosition> getAllObjects()

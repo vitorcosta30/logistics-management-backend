@@ -34,55 +34,55 @@ public class RequestRepository : BaseRepository<Request>, IRequestRepository
         return await this._objs.Where(x => x.Id == Id).Select(x =>  x.listOfItems ).ToListAsync();
     }
 
-    public async Task<int> getNumberToBeProcessed()
+    public Task<int> getNumberToBeProcessed()
     {
-        return  this._objs.Count(req => req.status.currentStatus.status == Status.REQUESTED);
+        return Task.FromResult(this._objs.Count(req => req.status.currentStatus.status == Status.REQUESTED));
     }
-    public async Task<int> getNumberOnCollection()
+    public Task<int> getNumberOnCollection()
     {
-        return  this._objs.Count(req => req.status.currentStatus.status == Status.COLLECTION);
+        return  Task.FromResult(this._objs.Count(req => req.status.currentStatus.status == Status.COLLECTION));
     }
-    public async Task<int> getNumberSent()
+    public Task<int> getNumberSent()
     {
-        return  this._objs.Count(req => req.status.currentStatus.status == Status.SENT);
+        return  Task.FromResult(this._objs.Count(req => req.status.currentStatus.status == Status.SENT));
     }
-    public async Task<int> getNumberReceived()
+    public Task<int> getNumberReceived()
     {
-        return  this._objs.Count(req => req.status.currentStatus.status == Status.RECEIVED);
+        return  Task.FromResult(this._objs.Count(req => req.status.currentStatus.status == Status.RECEIVED));
     }
 
-    public async Task<int> requestedOnDate(DateOnly date)
+    public Task<int> requestedOnDate(DateOnly date)
     {
         DateTime startDate = date.ToDateTime(new TimeOnly(0));
         DateTime endDate = startDate.AddDays(1);
-        return this._objs.SelectMany(req =>
-            req.status.previousStatus).Count(st => st.status == Status.REQUESTED && st.startDate >= startDate && st.startDate < endDate);
+        return Task.FromResult(this._objs.SelectMany(req =>
+            req.status.previousStatus).Count(st => st.status == Status.REQUESTED && st.startDate >= startDate && st.startDate < endDate));
         //return  this._objs.Count(req =>  req.status.previousStatus.Exists(st => st.status == Status.REQUESTED && DateOnly.FromDateTime(st.startDate) == date));
     }
     
-    public async Task<int> onCollectionOnDate(DateOnly date)
+    public Task<int> onCollectionOnDate(DateOnly date)
     {
         DateTime startDate = date.ToDateTime(new TimeOnly(0));
         DateTime endDate = startDate.AddDays(1);
-        return this._objs.SelectMany(req =>
-            req.status.previousStatus).Count(st => st.status == Status.COLLECTION && st.startDate >= startDate && st.startDate < endDate);
+        return Task.FromResult(this._objs.SelectMany(req =>
+            req.status.previousStatus).Count(st => st.status == Status.COLLECTION && st.startDate >= startDate && st.startDate < endDate));
         //return  this._objs.Count(req =>  req.status.previousStatus.Exists(st => st.status == Status.COLLECTION && DateOnly.FromDateTime(st.startDate) == date));
     }
     
-    public async Task<int> sentOnDate(DateOnly date)
+    public Task<int> sentOnDate(DateOnly date)
     {
         DateTime startDate = date.ToDateTime(new TimeOnly(0));
         DateTime endDate = startDate.AddDays(1);
-        return this._objs.SelectMany(req =>
-            req.status.previousStatus).Count(st => st.status == Status.SENT && st.startDate >= startDate && st.startDate < endDate);
+        return Task.FromResult(this._objs.SelectMany(req =>
+            req.status.previousStatus).Count(st => st.status == Status.SENT && st.startDate >= startDate && st.startDate < endDate));
         //return  this._objs.Count(req =>  req.status.previousStatus.Exists(st => st.status == Status.SENT && DateOnly.FromDateTime(st.startDate) == date));
     }
-    public async Task<int> receivedOnDate(DateOnly date)
+    public  Task<int> receivedOnDate(DateOnly date)
     {
         DateTime startDate = date.ToDateTime(new TimeOnly(0));
         DateTime endDate = startDate.AddDays(1);
-        return this._objs.SelectMany(req =>
-            req.status.previousStatus).Count(st => st.status == Status.RECEIVED && st.startDate >= startDate && st.startDate < endDate);
+        return Task.FromResult(this._objs.SelectMany(req =>
+            req.status.previousStatus).Count(st => st.status == Status.RECEIVED && st.startDate >= startDate && st.startDate < endDate));
         //return  this._objs.Count(req =>  req.status.previousStatus.Exists(st => st.status == Status.RECEIVED && DateOnly.FromDateTime(st.startDate) == date));
     }
 

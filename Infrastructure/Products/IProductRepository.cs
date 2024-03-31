@@ -7,7 +7,6 @@ public interface IProductRepository : IRepository<Product>
 {
     Task<List<Product>> GetAllAsyncWithPositions();
     
-    Task<Product> GetByIdAsyncWithPositions(long id);
 
 
 }
