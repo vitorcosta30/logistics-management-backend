@@ -6,9 +6,7 @@ namespace logistics_management_backend.Domain.Requests
 {
     public class RequestHistory : Entity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id;
+
         public RequestHistoryItem currentStatus;
 
         public List<RequestHistoryItem> previousStatus;
