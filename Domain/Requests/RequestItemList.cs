@@ -20,9 +20,9 @@ namespace logistics_management_backend.Domain.Requests
             this.items.Add(item);
         }
 
-        public void collectedItems(Product product)
+        public void collectedItems(long idItem)
         {
-            this.items.Find(item => item.item == product)?.wasCollected();
+            this.items.Find(item => item.Id == idItem)?.wasCollected();
         }
 
         public bool areAllItemsCollected()

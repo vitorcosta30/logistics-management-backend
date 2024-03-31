@@ -35,6 +35,15 @@ namespace logistics_management_backend.Domain.Requests
             }
             
         }
+        public void receiveRequest()
+        {
+            if(this.currentStatus.status == Status.SENT){
+                statusChange(Status.RECEIVED);
+            }else{
+                throw new BusinessRuleValidationException("Illegal Status change!! Request has not been sent yet");
+            }
+            
+        }
 
         public bool isToBeProcessed()
         {

@@ -24,9 +24,9 @@ namespace logistics_management_backend.Domain.Requests
             listOfItems.addItem(newItem);
         }
 
-        public void itemWasCollected(Product product)
+        public void itemWasCollected(long idItem)
         {
-            this.listOfItems.collectedItems(product);
+            this.listOfItems.collectedItems(idItem);
         }
 
         public void startCollection()
@@ -47,6 +47,17 @@ namespace logistics_management_backend.Domain.Requests
             else
             {
                 throw new BusinessRuleValidationException("Illegal Status change!! All goods haven't been collected or request is no longer on collection!!");
+            }
+        }
+        public void receiveRequest()
+        {
+            if (this.status.isToBeReceived() )
+            {
+                this.status.receiveRequest();
+            }
+            else
+            {
+                throw new BusinessRuleValidationException("Illegal Status change!! Request has not been sent yet!!");
             }
         }
 
