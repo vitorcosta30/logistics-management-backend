@@ -2,6 +2,7 @@ using logistics_management_backend.Infrastructure;
 using logistics_management_backend.Domain.Shared;
 using logistics_management_backend.Infrastructure.Products;
 using logistics_management_backend.Infrastructure.Requests;
+using logistics_management_backend.Services.Dashboard;
 using logistics_management_backend.Services.Products;
 using logistics_management_backend.Services.Requests;
 using Microsoft.EntityFrameworkCore;
@@ -65,6 +66,7 @@ namespace logistics_management_backend
             services.AddTransient<IRequestService,RequestService>();
             services.AddTransient<IRequestRepository, RequestRepository>();
 
+            services.AddTransient<IDashboardService,DashboardService>();
 
         }
 
