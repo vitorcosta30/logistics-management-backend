@@ -7,7 +7,7 @@ public class RequestItemMapper
 {
     public static RequestItemDTO toDto(RequestItem item)
     {
-        return new RequestItemDTO(ProductMapper.toDto(item.item), item.quantity,item.collected);
+        return new RequestItemDTO(item.Id,ProductMapper.toDto(item.item), item.quantity,item.collected);
     }
 
     public static RequestItemDTO[] toDto(RequestItemList items)
