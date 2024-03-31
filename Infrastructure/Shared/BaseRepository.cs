@@ -1,9 +1,4 @@
 using logistics_management_backend.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -27,7 +22,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : Entity
     public async Task<T> GetByIdAsync(long id)
     {
         return await getAllObjects()
-            .Where(x => id.Equals(x.Id)).FirstOrDefaultAsync();
+            .Where(x => id.Equals(x.Id)).FirstOrDefaultAsync() ?? throw new InvalidOperationException("Object does not exist!!");
         
     }
 
@@ -44,9 +39,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : Entity
         
     }
 
-    public async void Remove(T obj)
+    public void Remove(T obj)
     {
-        this._objs.Remove(obj);
+         this._objs.Remove(obj);
     }
 
     public abstract IIncludableQueryable<T, Object> getAllObjects();
