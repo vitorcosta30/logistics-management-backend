@@ -28,13 +28,20 @@ public class RequestService : IRequestService
         return res;
     }
 
+ 
+
     public async Task<List<RequestDTO>> getAllToBeProcessedAsync()
     {
         var list = await this._repo.getAllToBeProcessedAsync();
         List<RequestDTO> res = list.ConvertAll<RequestDTO>(req => RequestMapper.toDTO(req));
         return res;    
     }
-
+    public async Task<List<RequestDTO>> getAllToBeReceivedAsync()
+    {
+        var list = await this._repo.getAllToBeReceivedAsync();
+        List<RequestDTO> res = list.ConvertAll<RequestDTO>(req => RequestMapper.toDTO(req));
+        return res;    
+    }
     public Task<List<RequestItemDTO>> getProductsInRequestAsync(long Id)
     {
         throw new NotImplementedException();
@@ -87,11 +94,17 @@ public class RequestService : IRequestService
         await this._unitOfwork.CommitAsync();
         return RequestMapper.toDTO(req);
     }
-    public async Task<RequestDTO> collectedItem(long idRequest, long idProduct)
+    public async Task<RequestDTO> receiveRequest(long id)
+    {
+        var req = await this._repo.GetByIdAsync(id);
+        req.receiveRequest();
+        await this._unitOfwork.CommitAsync();
+        return RequestMapper.toDTO(req);
+    }
+    public async Task<RequestDTO> collectedItem(long idRequest, long idItem)
     {
         var req = await this._repo.GetByIdAsync(idRequest);
-        var prod = await this._productRepository.GetByIdAsync(idProduct);
-        req.itemWasCollected(prod);
+        req.itemWasCollected(idItem);
         await this._unitOfwork.CommitAsync();
         return RequestMapper.toDTO(req);
     }
