@@ -62,12 +62,12 @@ public class RequestService : IRequestService
         {
             try
             {
-                Product product = this._productRepository.GetByIdAsyncWithPositions(items[i].product.Id).Result;
+                Product product = this._productRepository.GetByIdAsync(items[i].product.Id).Result;
                 listOfItems.addItem(new RequestItem(product,items[i].quantity));
 
-            }catch(Exception e)
+            }catch(Exception)
             {
-                return null;
+                throw new NullReferenceException("Product does not exist");
 
             }
         }
