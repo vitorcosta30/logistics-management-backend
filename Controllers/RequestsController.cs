@@ -40,9 +40,16 @@ public class RequestsController : ControllerBase
     }
 
     [HttpGet("getAllToBeProcessed")]
-    public async Task<ActionResult<List<RequestDTO>>> GetRequestsTobeProcessed()
+    public async Task<ActionResult<List<RequestDTO>>> GetRequestsToBeProcessed()
     {
         return await _service.getAllToBeProcessedAsync();
+
+    }
+    
+    [HttpGet("getAllToBeReceived")]
+    public async Task<ActionResult<List<RequestDTO>>> GetRequestsToBeReceived()
+    {
+        return await _service.getAllToBeReceivedAsync();
 
     }
     [HttpGet("{id}")]
@@ -52,12 +59,12 @@ public class RequestsController : ControllerBase
 
     }
 
-    [HttpPatch("collectItem/{idRequest}/{idProduct}")]
-    public async Task<ActionResult<RequestDTO>> CollectItem(long idRequest, long idProduct)
+    [HttpPatch("collectItem/{idRequest}/{idItem}")]
+    public async Task<ActionResult<RequestDTO>> CollectItem(long idRequest, long idItem)
     {
         try
         {
-            return await _service.collectedItem(idRequest,idProduct);
+            return await _service.collectedItem(idRequest,idItem);
         }
         catch(Exception e)
         {
@@ -87,6 +94,20 @@ public class RequestsController : ControllerBase
         try
         {
             return await _service.sendRequest(id);
+
+        }
+        catch(Exception e)
+        {
+            return Problem(e.Message);
+
+        }
+    }
+    [HttpPatch("receiveRequest/{id}")]
+    public async Task<ActionResult<RequestDTO>> ReceiveRequest(long id)
+    {
+        try
+        {
+            return await _service.receiveRequest(id);
 
         }
         catch(Exception e)
