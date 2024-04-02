@@ -1,4 +1,5 @@
 using logistics_management_backend.Domain.Goods;
+using logistics_management_backend.Domain.Products;
 using logistics_management_backend.Domain.Shared;
 using logistics_management_backend.Infrastructure.Shared;
 using Microsoft.EntityFrameworkCore;

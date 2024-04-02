@@ -1,4 +1,5 @@
 using logistics_management_backend.Domain.Goods;
+using logistics_management_backend.Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

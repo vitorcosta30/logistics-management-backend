@@ -1,3 +1,4 @@
+using logistics_management_backend.Domain.Products;
 using logistics_management_backend.Domain.Shared;
 
 namespace logistics_management_backend.Domain.Goods
