@@ -1,14 +1,7 @@
+using logistics_management_backend.DTO.Products;
 using logistics_management_backend.DTO.Requests;
 using logistics_management_backend.Services.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 namespace logistics_management_backend.Controllers;
 [Route("api/[controller]")]
 [ApiController]
@@ -56,6 +49,13 @@ public class RequestsController : ControllerBase
     public async Task<ActionResult<RequestDTO>> getRequestById(long id)
     {
         return await _service.getRequestById(id);
+
+    }
+    
+    [HttpGet("{id}/getRoute")]
+    public async Task<ActionResult<ProductPositionDTO[]>> getRequestRouteById(long id)
+    {
+        return await _service.getRoute(id);
 
     }
 
