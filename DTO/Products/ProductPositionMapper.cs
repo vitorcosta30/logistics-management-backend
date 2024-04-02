@@ -1,4 +1,5 @@
 using logistics_management_backend.Domain.Goods;
+using logistics_management_backend.Domain.Products;
 
 namespace logistics_management_backend.DTO.Products;
 
