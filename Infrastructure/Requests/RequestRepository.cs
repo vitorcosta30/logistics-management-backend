@@ -1,5 +1,6 @@
 using logistics_management_backend.Domain.Goods;
 using logistics_management_backend.Domain.Requests;
+using logistics_management_backend.DTO.Products;
 using logistics_management_backend.Infrastructure.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -84,6 +85,14 @@ public class RequestRepository : BaseRepository<Request>, IRequestRepository
         return Task.FromResult(this._objs.SelectMany(req =>
             req.status.previousStatus).Count(st => st.status == Status.RECEIVED && st.startDate >= startDate && st.startDate < endDate));
         //return  this._objs.Count(req =>  req.status.previousStatus.Exists(st => st.status == Status.RECEIVED && DateOnly.FromDateTime(st.startDate) == date));
+    }
+    
+
+    public async Task<ProductPosition[]> getRoute(long id)
+    {
+        Request req = await this.GetByIdAsync(id);
+        ProductPosition[] route = req.getRoute();
+        return route;
     }
 
 

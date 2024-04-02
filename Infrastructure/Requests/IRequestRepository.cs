@@ -27,6 +27,9 @@ public interface IRequestRepository : IRepository<Request>
 
     public Task<int> receivedOnDate(DateOnly date);
 
+    public Task<ProductPosition[]> getRoute(long id);
+
+
 
 
 
