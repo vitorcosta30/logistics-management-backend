@@ -61,5 +61,10 @@ namespace logistics_management_backend.Domain.Requests
             }
         }
 
+        public ProductPosition[] getRoute()
+        {
+            return this.listOfItems.shortestRoute();
+        }
+
     }
 }

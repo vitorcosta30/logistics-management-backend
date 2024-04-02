@@ -29,7 +29,50 @@ namespace logistics_management_backend.Domain.Requests
         { 
             return this.items.TrueForAll(item => item.collected) ;
         }
-        
+
+        public ProductPosition[] shortestRoute()
+        {
+            //copy.Sort((item1, item2) => item1.item.position.posX - item2.item.position.posX);
+            List<ProductPosition> points = new List<ProductPosition>();
+            this.items.ForEach(item => points.Add(item.item.position));
+            ProductPosition currentPoint = new ProductPosition(0, 0);
+            List<ProductPosition> route = new List<ProductPosition>();
+            route.Add(currentPoint);
+            while (points.Count > 0)
+            {
+                ProductPosition nextPosition = nextPoint( points, currentPoint);
+                points.Remove(nextPosition);
+                route.Add(nextPosition);
+                currentPoint = nextPosition;
+            }
+
+            return route.ToArray();
+
+        }
+
+        private ProductPosition nextPoint(List<ProductPosition> remainingPositions, ProductPosition currentPoint)
+        {
+            ProductPosition pos = remainingPositions[0];
+            double distance = distanceBetweenTwoPoints(currentPoint, pos);
+            for (int i = 1; i < remainingPositions.Count; i++)
+            {
+                double newDistance = distanceBetweenTwoPoints(remainingPositions[i], currentPoint);
+                if (newDistance < distance)
+                {
+                    pos = remainingPositions[i];
+                    distance = newDistance;
+                }
+
+            }
+
+            return pos;
+        }
+
+        private double distanceBetweenTwoPoints(ProductPosition pos1, ProductPosition pos2)
+        {
+            return Math.Sqrt(((pos1.posX - pos2.posX) * (pos1.posX - pos2.posX)) +
+                   ((pos1.posY - pos2.posY) * (pos1.posY - pos2.posY)));
+        }
         
     }
 }
