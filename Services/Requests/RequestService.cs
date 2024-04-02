@@ -1,6 +1,7 @@
 using logistics_management_backend.Domain.Goods;
 using logistics_management_backend.Domain.Requests;
 using logistics_management_backend.Domain.Shared;
+using logistics_management_backend.DTO.Products;
 using logistics_management_backend.DTO.Requests;
 using logistics_management_backend.Infrastructure.Products;
 using logistics_management_backend.Infrastructure.Requests;
@@ -107,5 +108,12 @@ public class RequestService : IRequestService
         req.itemWasCollected(idItem);
         await this._unitOfwork.CommitAsync();
         return RequestMapper.toDTO(req);
+    }
+
+    public async Task<ProductPositionDTO []> getRoute(long id)
+    {
+        ProductPosition[] positions = await this._repo.getRoute(id);
+        ProductPositionDTO[] res = ProductPositionMapper.toDto(positions);
+        return res;
     }
 }

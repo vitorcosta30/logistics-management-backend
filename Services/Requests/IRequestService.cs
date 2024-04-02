@@ -22,6 +22,8 @@ public interface IRequestService
     Task<RequestDTO> collectedItem(long idRequest, long idProduct);
     
     Task<RequestDTO> getRequestById(long id);
+    Task<ProductPositionDTO[]> getRoute(long id);
+
 
 
 
