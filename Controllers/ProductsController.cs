@@ -23,7 +23,7 @@ public class ProductsController : ControllerBase
             return CreatedAtAction("CreateProduct", new { id = prod.Id}, prod);
 
         }
-        catch (BusinessRuleValidationException e)
+        catch (Exception e)
         {
             return BadRequest(e.Message);
         }

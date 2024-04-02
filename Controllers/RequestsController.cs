@@ -48,14 +48,28 @@ public class RequestsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<RequestDTO>> getRequestById(long id)
     {
-        return await _service.getRequestById(id);
+        try
+        {
+            return await _service.getRequestById(id);
+        }catch(Exception e)
+        {
+            return Problem(e.Message);
+
+        }
 
     }
     
     [HttpGet("{id}/getRoute")]
     public async Task<ActionResult<ProductPositionDTO[]>> getRequestRouteById(long id)
     {
-        return await _service.getRoute(id);
+        try
+        {
+            return await _service.getRoute(id);
+        }catch(Exception e)
+        {
+            return Problem(e.Message);
+
+        }
 
     }
 
